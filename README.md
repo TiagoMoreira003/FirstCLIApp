@@ -33,5 +33,5 @@ Generates a password and saves it to a file.
 ### Example:
 
 ```bash
-go run main.go generate -u -s -l 16 -f mypasswords.txt
+go run main.go generate -u -s -l 16 -f mypasswords
 ```
