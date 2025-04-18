@@ -6,6 +6,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -26,15 +27,28 @@ func init() {
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
 	// listCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// listCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	listCmd.Flags().StringP("file", "f", "password", "Specify the file")
 }
 
 func listPassword(cmd *cobra.Command, args []string){
-	data, _ := os.ReadFile("password.txt")
+	file, _ := cmd.Flags().GetString("file")
+	list := []string{}
 
-	fmt.Println(string(data))
-	
+	if file == "all"{
+		files, _ := os.ReadDir("C:/Users/ALEXA/FirstCLIApp")
+		for _, f := range files {
+			if strings.HasSuffix(f.Name(), ".txt"){
+				content, _ := os.ReadFile(f.Name())
+				list = append(list, string(content))
+			}
+		} 
+	} else{
+		filename := file + ".txt"
+		data, _ := os.ReadFile(filename)
+		list = append(list, string(data))
+	}
+
+	for f,_ := range list{
+		fmt.Println(list[f])
+	}
 }

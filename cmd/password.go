@@ -21,14 +21,17 @@ func init(){
 	generateCmd.Flags().IntP("length", "l", 4, "Length of the password")
 	generateCmd.Flags().BoolP("special-characters", "c", false, "Special characters (true/false)" )
 	generateCmd.Flags().BoolP("upper", "u", false, "Use uppercase letters")
+	generateCmd.Flags().StringP("file", "f", "password", "Specify the filse destination")
 }
 
 func generatePassword(cmd *cobra.Command, args []string){
 	length, _ := cmd.Flags().GetInt("length")
 	specialChar, _ := cmd.Flags().GetBool("special-characters")
 	uppercase, _ := cmd.Flags().GetBool("upper")
+	file, _ := cmd.Flags().GetString("file") 
 	
 	password := ""
+	filename := file + ".txt"
 
 	var letters string
 
@@ -51,7 +54,7 @@ func generatePassword(cmd *cobra.Command, args []string){
 		password += string(letters[randomIndex])
 	}
 
-	os.WriteFile("password.txt", []byte(password), 0644)
+	os.WriteFile(filename, []byte(password), 0644)
 
 	fmt.Println(password)
 }
