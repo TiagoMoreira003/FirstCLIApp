@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"math/rand"
+	"os"
 
 	"github.com/spf13/cobra"
 )
@@ -49,5 +50,8 @@ func generatePassword(cmd *cobra.Command, args []string){
 		randomIndex := rand.Intn(len(letters))
 		password += string(letters[randomIndex])
 	}
+
+	os.WriteFile("password.txt", []byte(password), 0644)
+
 	fmt.Println(password)
 }
