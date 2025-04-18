@@ -54,7 +54,8 @@ func generatePassword(cmd *cobra.Command, args []string){
 		password += string(letters[randomIndex])
 	}
 
-	os.WriteFile(filename, []byte(password), 0644)
+	f, _ := os.OpenFile(filename, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+	f.WriteString("\n" + password)
 
 	fmt.Println(password)
 }
