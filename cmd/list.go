@@ -27,7 +27,7 @@ func init() {
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
 	// listCmd.PersistentFlags().String("foo", "", "A help for foo")
-	listCmd.Flags().StringP("file", "f", "password", "Specify the file")
+	listCmd.Flags().StringP("file", "f", "all", "Specify the file")
 }
 
 func listPassword(cmd *cobra.Command, args []string){
